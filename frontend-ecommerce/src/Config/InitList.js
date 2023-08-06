@@ -3,106 +3,169 @@ const initList = [
     id: 1,
     img: "https://m.media-amazon.com/images/I/613IJTfd4JL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 2,
     img: "https://m.media-amazon.com/images/I/61JXmQsaMdL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 3,
     img: "https://m.media-amazon.com/images/I/71P7dg0psjL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 4,
     img: "https://m.media-amazon.com/images/I/61bPiEPsl4L._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 5,
     img: "https://m.media-amazon.com/images/I/61sfUlu18JL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 6,
     img: "https://m.media-amazon.com/images/I/615D0CB8NOL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 7,
     img: "https://m.media-amazon.com/images/I/51iuvBRzq3L._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 8,
     img: "https://m.media-amazon.com/images/I/61AimGVbY9L._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 9,
     img: "https://m.media-amazon.com/images/I/61VgZPzVIBL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 10,
     img: "https://m.media-amazon.com/images/I/61aVumIonhL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 11,
     img: "https://m.media-amazon.com/images/I/41whMkdjtBL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 12,
     img: "https://m.media-amazon.com/images/I/61mi9uULrLL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 13,
     img: "https://m.media-amazon.com/images/I/61aVumIonhL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 14,
     img: "https://m.media-amazon.com/images/I/41whMkdjtBL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 15,
     img: "https://m.media-amazon.com/images/I/61mi9uULrLL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 16,
     img: "https://m.media-amazon.com/images/I/61mi9uULrLL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 17,
     img: "https://m.media-amazon.com/images/I/71b7Hy82JpL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 18,
     img: "https://m.media-amazon.com/images/I/61199SIEUbL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 19,
     img: "https://m.media-amazon.com/images/I/61S3zhCVkPL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 20,
     img: "https://m.media-amazon.com/images/I/61wnXwdvIzL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 21,
     img: "https://m.media-amazon.com/images/I/51lfB8o5WQL._AC_SY200_.jpg",
     type: "book",
+    name: "books name",
+    description:
+      "Hay personas que son felices aún en situaciones donde el bienestar es casi inexistente y otras personas que pueden tener «el mundo a sus pies» y aún así, sentirse incompletos, ¿por qué? La respuesta es muy sencilla: Bienestar no es lo mismo que felicidad.",
   },
   {
     id: 22,
