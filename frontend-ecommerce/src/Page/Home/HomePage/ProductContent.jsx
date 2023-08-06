@@ -2,7 +2,7 @@ import React from "react";
 import BoxProduct from "../../../Components/BoxProduct/BoxProduct";
 
 import TopSeller from "../../../Components/TopSeller/TopSeller";
-import initList from "../../../Config/InitList";
+import initList from "../../../Config/InitLitt";
 
 const ProductContent = ({ handleOnclick }) => {
   const productPopular = initList.filter(
