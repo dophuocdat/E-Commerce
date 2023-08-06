@@ -8,8 +8,9 @@ import Search from "../Search/Search";
 import Language from "./Language/Language";
 import "./Sidebar.css";
 import SubSidebar from "./SubSidebar/SubSidebar";
+import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ loggedIn }) => {
   const [optionSetting, setOptionSetting] = useState(false);
   const handleOnclick = () => {
     setOptionSetting((i) => !i);
@@ -19,11 +20,13 @@ const Sidebar = () => {
     <>
       <div className="w-full bg-slate-700 h-20">
         <div className="h-full flex items-center gap-2">
-          <img
-            src="https://th.bing.com/th/id/R.ca4da319ab763c8d996fff8ecaacc6ef?rik=xyZWahtpQkPunQ&riu=http%3a%2f%2fwww.adventureswithadifference.com%2fresources%2fAvailable-at-Amazon-logo-transparent-460x280.png&ehk=eUHJEueVu7znNS7T9blT1YjDdqvrTnrqhgoz7oBbeIw%3d&risl=&pid=ImgRaw&r=0"
-            alt=""
-            className=" scale-50 w-32"
-          />
+          <Link to={"/"}>
+            <img
+              src="https://th.bing.com/th/id/R.ca4da319ab763c8d996fff8ecaacc6ef?rik=xyZWahtpQkPunQ&riu=http%3a%2f%2fwww.adventureswithadifference.com%2fresources%2fAvailable-at-Amazon-logo-transparent-460x280.png&ehk=eUHJEueVu7znNS7T9blT1YjDdqvrTnrqhgoz7oBbeIw%3d&risl=&pid=ImgRaw&r=0"
+              alt=""
+              className=" scale-50 w-32"
+            />
+          </Link>
           <div className="location text-white max-sm:hidden">
             <div className="flex-row flex items-center justify-center gap-2">
               <FaLocationDot />
@@ -54,7 +57,11 @@ const Sidebar = () => {
                     <IoIosArrowDown className="text-white text-2xl" />
                   )}
                 </p>
-                {optionSetting ? <AccountList /> : ""}
+                {optionSetting ? (
+                  <AccountList onClick={handleOnclick} loggedIn={loggedIn} />
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <div>

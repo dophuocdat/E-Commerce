@@ -8,7 +8,7 @@ const Footer = () => {
     });
   };
   return (
-    <div className="w-full relative -top-32 ">
+    <div className="w-full relative -top-48 ">
       <div className="bg-slate-700 h-12 flex items-center justify-center text-white">
         <p className="cursor-pointer" onClick={scrollToTop}>
           Back to top

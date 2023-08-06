@@ -2,18 +2,27 @@ import React from "react";
 import BoxProduct from "../../../Components/BoxProduct/BoxProduct";
 
 import TopSeller from "../../../Components/TopSeller/TopSeller";
-import listBooks from "../../../Config/SellerBooksConfig";
-import internationalTopConfig from "../../../Config/internationalTopConfig";
-import ProductConfig from "../../../Config/ProductConfig";
-import ProductConfig2 from "../../../Config/ProductConfig2";
-import PopularProductConfig from "../../../Config/PopularProductConfig";
+import initList from "../../../Config/InitLitt";
 
 const ProductContent = ({ handleOnclick }) => {
+  const productPopular = initList.filter(
+    (item) => item.type === "productPopular"
+  );
+  const listBooks = initList.filter((item) => item.type === "book");
+  const internationalTopConfig = initList.filter(
+    (item) => item.type === "internationalTop"
+  );
+  const productTopDeal = initList.filter(
+    (item) => item.type === "productTopDeal"
+  );
+  const skinCareProducts = initList.filter(
+    (item) => item.type === "skinCareProduct"
+  );
   return (
-    <div className="relative -top-32 px-5">
+    <div className="relative -top-52 px-5">
       <div>
         <BoxProduct
-          prod={ProductConfig}
+          prod={productTopDeal}
           col={4}
           row={3}
           onClick={handleOnclick}
@@ -29,13 +38,13 @@ const ProductContent = ({ handleOnclick }) => {
       <div>
         <TopSeller
           prod={internationalTopConfig}
-          title={"TInternational top sellers in Kitchen"}
+          title={"International top sellers in Kitchen"}
           onClick={handleOnclick}
         />
       </div>
       <div>
         <BoxProduct
-          prod={ProductConfig2}
+          prod={productPopular}
           col={4}
           row={1}
           onClick={handleOnclick}
@@ -43,7 +52,7 @@ const ProductContent = ({ handleOnclick }) => {
       </div>
       <div>
         <TopSeller
-          prod={PopularProductConfig}
+          prod={skinCareProducts}
           title={"Popular products in Beauty internationally"}
           onClick={handleOnclick}
         />

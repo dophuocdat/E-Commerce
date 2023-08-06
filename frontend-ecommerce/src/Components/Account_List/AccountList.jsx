@@ -1,20 +1,24 @@
 import React from "react";
-
-const AccountList = () => {
+import { Link } from "react-router-dom";
+const AccountList = ({ onClick, loggedIn }) => {
   return (
     <div className="bg-slate-200 w-[30rem] absolute top-20 z-50">
-      <div className="grid grid-cols-6 gap-4 ">
+      <div className="grid grid-cols-6 gap-4 " onClick={onClick}>
         <div
           className="col-start-2 col-span-4 
                   font-semibold flex items-center 
                   justify-center py-3 flex-col "
         >
-          <button className="bg-yellow-50 w-40 h-9 rounded-lg hover:bg-yellow-400 transition-all ">
+          <Link
+            to={"/signIn/auth"}
+            className="bg-yellow-50 w-40 h-9 rounded-lg hover:bg-yellow-400 transition-all "
+            onClick={() => loggedIn(false)}
+          >
             Sign in
-          </button>
+          </Link>
           <small className="text-slate-400 font-light">
             new customer?{" "}
-            <a href="#" className="text-blue-500">
+            <a href="#S" className="text-blue-500">
               Start here
             </a>
           </small>
