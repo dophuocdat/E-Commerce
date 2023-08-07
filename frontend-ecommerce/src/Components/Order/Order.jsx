@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import initList from "../../Config/InitList";
+
 import OrderDetails from "./OrderDetails/OrderDetails";
+import initList from "../../Config/InitList";
+import Recomment from "../Recomment/Recomment";
 
 const Order = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(initList);
   const productOrder = product.find((item) => item.id === parseInt(id));
   return (
-    <div className="px-52 bg-white">
-      <div className="flex py-24 gap-3 ">
-        <div className="w-1/3">
+    <div className="px-52 bg-white  max-lg:px-10 max-xl:px-20">
+      <div className="flex py-24 gap-3 w-full max-lg:flex-col">
+        <div className="w-4/6 max-lg:w-full max-lg:flex items-center justify-center">
           <div>
             {
               <img
@@ -27,18 +29,20 @@ const Order = () => {
             <hr />
           </div>
 
-          <div className="text-xl font-medium ">{productOrder.description}</div>
+          <div className="text-sm font-medium ">{productOrder.description}</div>
         </div>
-        <div className="w-2/6 border">
+
+        <div className="w-4/6 border max-lg:w-full">
           <OrderDetails />
         </div>
       </div>
+      <hr />
       <div>
         <div>
           <span>Product details</span>
         </div>
         <li>
-          Publisher:{" "}
+          Publisher:
           <span>Library and Archives Canada (December 23, 2022 )</span>
         </li>
         <li>
@@ -47,17 +51,19 @@ const Order = () => {
         <li>Pagerback: 195 pages </li>
         <li>ISD-10: 134235342x</li>
         <li>
-          ISBN-13: <span>978-1777847326</span>{" "}
+          ISBN-13: <span>978-1777847326</span>
         </li>
         <li>
           Item Weight : <span>9.5 ounfpe</span>
         </li>
         <li>
-          {" "}
-          Dimensions : <spam>Dimensions : 6 x 0.44 x 9 inches</spam>{" "}
+          Dimensions : <spam>Dimensions : 6 x 0.44 x 9 inches</spam>
         </li>
-        <li></li>
       </div>
+      <hr />
+      <br />
+      <hr />
+      <Recomment />
     </div>
   );
 };

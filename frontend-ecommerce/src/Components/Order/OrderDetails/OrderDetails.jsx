@@ -23,7 +23,7 @@ const OrderDetails = () => {
           <span className="text-lg text-green-700">In Stock</span>
           <div>
             <span>Qty:</span>
-            <select name="" id="" className="w-16 rounded-lg px-5">
+            <select name="" id="" className="w-fit rounded-lg px-5">
               {Array.from({ length: 32 }, (_, i) => {
                 return (
                   <option key={i} value={i + 1}>
