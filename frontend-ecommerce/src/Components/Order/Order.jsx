@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 
 import OrderDetails from "./OrderDetails/OrderDetails";
 import initList from "../../Config/InitList";
-import Recomment from "../Recomment/Recomment";
+import Comment from "../Comment/Comment";
 
 const Order = () => {
   const { id } = useParams();
@@ -57,13 +57,13 @@ const Order = () => {
           Item Weight : <span>9.5 ounfpe</span>
         </li>
         <li>
-          Dimensions : <spam>Dimensions : 6 x 0.44 x 9 inches</spam>
+          Dimensions : <span>Dimensions : 6 x 0.44 x 9 inches</span>
         </li>
       </div>
       <hr />
       <br />
       <hr />
-      <Recomment />
+      <Comment />
     </div>
   );
 };

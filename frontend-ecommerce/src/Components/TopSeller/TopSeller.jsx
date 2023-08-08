@@ -29,6 +29,7 @@ const TopSeller = ({ prod, title, onClick }) => {
             {prod.map((item) => {
               return (
                 <img
+                  className="h-60 rounded-lg "
                   src={item.img}
                   alt=""
                   key={item.id}

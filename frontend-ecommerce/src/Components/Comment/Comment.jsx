@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsFillSendCheckFill, BsFillShareFill } from "react-icons/bs";
 import { BiCommentDots } from "react-icons/bi";
 import { FcDislike, FcLike } from "react-icons/fc";
 import { GrView } from "react-icons/gr";
-import { AiFillStar, AiOutlineDownload, AiOutlineStar } from "react-icons/ai";
+import { AiOutlineDownload } from "react-icons/ai";
 import { MdPreview } from "react-icons/md";
+import StarRating from "./StarRating";
 
-const Recomment = () => {
+const Comment = () => {
+  const [comment, setCommnent] = useState({ rating: 0, content: "" });
+  const [rating, setRating] = useState(null);
+
+  const handleComment = (e) => {
+    setCommnent({ rating: rating, content: e.target.value });
+  };
+
   return (
     <div>
       <div className="flex ">
@@ -70,17 +78,20 @@ const Recomment = () => {
               );
             })}
           </div>
-          <div className="w-full py-10 relative">
+          <div className="w-full py-10 ">
             <div className="start">
-              <AiFillStar />
-              <AiOutlineStar />
+              <StarRating setRating={setRating} rating={rating} />
             </div>
-            <input
-              type="text"
-              placeholder="Add a comment"
-              className="w-full outline-double h-10 px-2"
-            />
-            <BsFillSendCheckFill className="absolute top-1/2 right-2 -translate-y-1/2" />
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Add a comment"
+                className="w-full outline-double h-10 px-2"
+                name=""
+                onChange={(e) => handleComment(e)}
+              />
+              <BsFillSendCheckFill className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer" />
+            </div>
           </div>
         </div>
       </div>
@@ -88,4 +99,4 @@ const Recomment = () => {
   );
 };
 
-export default Recomment;
+export default Comment;
