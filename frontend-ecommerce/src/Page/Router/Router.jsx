@@ -5,6 +5,7 @@ import HomePage from "../Home/HomePage/HomePage";
 import AccountAuth from "../../Components/Account/AccountAuth";
 import Account from "../../Components/Account/Account";
 import Order from "../../Components/Order/Order";
+import AdminPage from "../AdminPage/AdminPage";
 
 const Router = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -27,6 +28,7 @@ const Router = () => {
             element={<Account loggedIn={setLoggedIn} />}
           ></Route>
           <Route path="/product/:id" element={<Order />}></Route>
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </div>
     </div>

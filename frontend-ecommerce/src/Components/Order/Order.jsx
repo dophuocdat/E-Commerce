@@ -1,14 +1,20 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import OrderDetails from "./OrderDetails/OrderDetails";
 import initList from "../../Config/InitList";
 import Comment from "../Comment/Comment";
-
+import TopSeller from "../../Components/TopSeller/TopSeller";
 const Order = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(initList);
   const productOrder = product.find((item) => item.id === parseInt(id));
+  const trending = initList.filter((item) => item.type === "trending");
+
+  const handleOnclick = (id) => {
+    navigate(`/product/${id}`);
+  };
   return (
     <div className="px-52 bg-white  max-lg:px-10 max-xl:px-20">
       <div className="flex py-24 gap-3 w-full max-lg:flex-col">
@@ -61,9 +67,10 @@ const Order = () => {
         </li>
       </div>
       <hr />
-      <br />
-      <hr />
-      <Comment />
+      <TopSeller prod={trending} title={"Trending"} onClick={handleOnclick} />
+      <div className="py-10">
+        <Comment />
+      </div>
     </div>
   );
 };

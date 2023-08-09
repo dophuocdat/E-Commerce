@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
-const StarRating = ({ setRating, rating }) => {
+const StarRating = ({ setRating, rating, size = "1.9rem" }) => {
   const [tempRating, setTempRating] = useState(0);
   const handleRating = (r) => {
     setRating(r);
@@ -9,7 +9,7 @@ const StarRating = ({ setRating, rating }) => {
   };
   return (
     <div className="p-4">
-      <div className="flex gap-3">
+      <div className="flex gap-1">
         {Array.from({ length: 5 }, (_, i) => {
           return (
             <Star
@@ -18,6 +18,7 @@ const StarRating = ({ setRating, rating }) => {
               onRate={() => handleRating(i + 1)}
               onHoverIn={() => setTempRating(i + 1)}
               onHoverOut={() => setTempRating(0)}
+              size={size}
             />
           );
         })}
@@ -28,10 +29,10 @@ const StarRating = ({ setRating, rating }) => {
 
 export default StarRating;
 
-function Star({ full, onRate, onHoverIn, onHoverOut }) {
+function Star({ full, onRate, onHoverIn, onHoverOut, size }) {
   return (
     <div
-      className=" text-[1.9rem]"
+      className={`text-[${size}]`}
       onClick={onRate}
       onMouseEnter={onHoverIn}
       onMouseLeave={onHoverOut}

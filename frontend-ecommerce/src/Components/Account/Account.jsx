@@ -1,12 +1,33 @@
-import React from "react";
-import { useNavigate } from "react-router";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { AccountUser } from "../../Config/AccountUser";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/authActions";
+import { useHistory } from "react-router-dom";
 
 const Account = ({ loggedIn }) => {
   const navigate = useNavigate();
-  const handleContinue = () => {
-    navigate("/");
-    loggedIn(true);
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  const emailOrPhone = location.state ? location.state.emailOrPhone : "";
+  //console.log(emailOrPhone);
+  const [isLogged, setIsLogged] = useState("");
+  const handleContinue = (e) => {
+    e.preventDefault();
+    if (isLogged) {
+      navigate("/");
+      loggedIn(true);
+      dispatch(login({ user: isLogged }));
+      localStorage.setItem("isLoggedIn", "true");
+    } else {
+      alert("Please enter your password");
+    }
+  };
+  const onChange = (e) => {
+    let value = e.target.value;
+    setIsLogged(AccountUser.find((ac) => ac.password === value));
   };
   return (
     <div className="bg-white h-full flex items-center justify-center  flex-col">
@@ -23,7 +44,7 @@ const Account = ({ loggedIn }) => {
         <div className="p-7">
           <div className=" pb-3 text-2xl font-medium">Sign In</div>
           <div className="text-[0.76rem]">
-            <span>datdo775@gmail.com</span>
+            <span>{emailOrPhone.email}</span>
             <Link to={"/SignIn/auth"} className="text-blue-500">
               {" "}
               Change
@@ -46,12 +67,13 @@ const Account = ({ loggedIn }) => {
                 id="password"
                 className="p-2 border border-slate-400 rounded-lg"
                 placeholder="Your password"
+                onChange={(e) => onChange(e)}
               />
             </div>
             <div className="py-4 w-full flex items-center justify-center">
               <button
                 className="bg-yellow-500 p-1 rounded-lg w-5/6 text-sm "
-                onClick={handleContinue}
+                onClick={(e) => handleContinue(e)}
               >
                 Sign in
               </button>

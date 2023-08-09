@@ -17,7 +17,7 @@ const Comment = () => {
 
   return (
     <div>
-      <div className="flex ">
+      <div className="flex border">
         <div className="rating border w-1/6">
           <div className="flex flex-col items-center justify-center gap-3">
             <span className="text-4xl font-semibold">4.5</span>
@@ -56,12 +56,14 @@ const Comment = () => {
           </div>
         </div>
         <div className="w-full">
-          <h1 className="flex items-center justify-center w-full">Comment</h1>
+          <h1 className="flex items-center justify-center w-full text-lg font-semibold">
+            Comment
+          </h1>
           <div className="flex flex-col gap-4 justify-center ">
             {Array.from({ length: 5 }, (_, i) => {
               return (
-                <div key={i}>
-                  <div className=" flex items-start justify-start gap-3 ">
+                <div key={i} className="py-1">
+                  <div className=" flex items-start justify-start gap-3 px-10 ">
                     <img
                       src="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_640.jpg"
                       alt=""
@@ -69,11 +71,14 @@ const Comment = () => {
                     />
                     <div className="flex flex-col">
                       <span>Nguyen Van A</span>
-                      <span className="text-gray-500 ">
-                        5.0 out of 5 stars Great book
+                      <span className="text-gray-500 text-sm">
+                        <StarRating rating={5} size="10px" enable={false} />
                       </span>
+                      <span>Comment</span>
+                      <span className="text-gray-500 text-sm">2 days ago</span>
                     </div>
                   </div>
+                  <hr />
                 </div>
               );
             })}

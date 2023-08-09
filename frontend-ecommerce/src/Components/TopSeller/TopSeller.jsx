@@ -18,7 +18,7 @@ const TopSeller = ({ prod, title, onClick }) => {
   return (
     <div className="bg-white border my-3 ">
       <div className="px-7">
-        <div>
+        <div className="text-2xl font-semibold py-1">
           <h1>{title}</h1>
         </div>
         <div className=" relative">
@@ -38,10 +38,10 @@ const TopSeller = ({ prod, title, onClick }) => {
               );
             })}
 
-            <button className="text-[2rem] absolute left-0 w-10 top-1/2 -translate-y-1/2 h-1/2 bg-white">
+            <button className="text-[2rem] absolute left-0 w-10 top-1/2 -translate-y-1/2 h-1/2 bg-white opacity-25 hover:opacity-100 rounded-lg">
               <MdKeyboardArrowLeft onClick={handlePrevClick} />
             </button>
-            <button className="text-[2rem] absolute right-0 w-10 top-1/2 -translate-y-1/2 h-1/2 bg-white">
+            <button className="text-[2rem] absolute right-0 w-10 top-1/2 -translate-y-1/2 h-1/2 bg-white opacity-25 hover:opacity-100 rounded-lg">
               <MdKeyboardArrowRight onClick={handleNextClick} />
             </button>
           </div>

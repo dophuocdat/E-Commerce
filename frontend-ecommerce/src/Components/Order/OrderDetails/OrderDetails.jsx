@@ -1,7 +1,19 @@
 import React from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router";
 
 const OrderDetails = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  // console.log(isLoggedIn);
+  // const user = useSelector((state) => state.user);
+  // console.log(user.user.name);
+  const handleOrder = () => {
+    isLoggedIn ? console.log("order") : navigate("/SignIn/auth");
+  };
+
   return (
     <div>
       <div className="p-2">
@@ -35,7 +47,10 @@ const OrderDetails = () => {
           </div>
         </div>
         <div className="flex items-center justify-center flex-col gap-3 pb-4">
-          <button className="w-5/6 text-sm font-medium bg-yellow-400 h-7 rounded-lg ">
+          <button
+            className="w-5/6 text-sm font-medium bg-yellow-400 h-7 rounded-lg "
+            onClick={() => handleOrder()}
+          >
             Add to Cart
           </button>
           <button

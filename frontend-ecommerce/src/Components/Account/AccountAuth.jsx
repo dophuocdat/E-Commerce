@@ -2,16 +2,29 @@ import React, { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { AccountUser } from "../../Config/AccountUser";
 
 const AccountAuth = ({ loggedIn }) => {
   const [needHelp, setNeedHelp] = useState(false);
+  const [emailOrPhone, setEmailOrPhone] = useState({});
+  const [error, setError] = useState(false);
+
   const handleNeedHelp = () => {
     setNeedHelp(!needHelp);
-    console.log(needHelp);
   };
   const navigate = useNavigate();
-  const handleContinue = () => {
-    navigate("/SignIn");
+  const handleContinue = (e) => {
+    e.preventDefault();
+    emailOrPhone
+      ? navigate("/SignIn", { state: { emailOrPhone } })
+      : setError(true);
+  };
+
+  const onChange = (e) => {
+    let value = e.target.value;
+    setEmailOrPhone(
+      AccountUser.find((ac) => ac.email === value || ac.phone === value)
+    );
   };
 
   return (
@@ -38,12 +51,16 @@ const AccountAuth = ({ loggedIn }) => {
                 id="emailOrPhone"
                 className="p-2 border border-slate-400 rounded-lg"
                 placeholder="Email or mobile phone number"
+                onChange={(e) => onChange(e)}
               />
+              {error ? (
+                <small className="text-red-600">Not found Your Email</small>
+              ) : null}
             </div>
             <div className="py-4 w-full flex items-center justify-center">
               <button
                 className="bg-yellow-500 p-1 rounded-lg w-5/6 "
-                onClick={handleContinue}
+                onClick={(e) => handleContinue(e)}
               >
                 Continue
               </button>
