@@ -4,10 +4,10 @@ import BoxProduct from "../../BoxProduct/BoxProduct";
 
 const Carousel = () => {
   const carousel = [
-    "https://m.media-amazon.com/images/I/71U-Q+N7PXL._SX3000_.jpg",
-    "https://m.media-amazon.com/images/I/81KkrQWEHIL._SX3000_.jpg",
-    "https://m.media-amazon.com/images/I/61zAjw4bqPL._SX3000_.jpg",
-    "https://m.media-amazon.com/images/I/61lwJy4B8PL._SX3000_.jpg",
+    "https://cdn.pixabay.com/photo/2015/06/02/12/59/book-794978_1280.jpg",
+    "https://cdn.pixabay.com/photo/2017/06/10/16/22/coffee-2390136_640.jpg",
+    "https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_640.jpg",
+    "https://cdn.pixabay.com/photo/2019/05/14/21/50/storytelling-4203628_640.jpg",
   ];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -27,7 +27,7 @@ const Carousel = () => {
         <img
           src={carousel[currentImageIndex]}
           alt="..."
-          className="h-full w-full"
+          className="h-[648px] w-full aspect-[1620/648] rounded-lg object-fit"
         />
         <button
           className="absolute top-1/4 left-10 text-3xl"

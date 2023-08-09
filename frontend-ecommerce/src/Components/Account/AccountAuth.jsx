@@ -3,16 +3,18 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { AccountUser } from "../../Config/AccountUser";
+import axios from "axios";
 
 const AccountAuth = ({ loggedIn }) => {
   const [needHelp, setNeedHelp] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState({});
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   const handleNeedHelp = () => {
     setNeedHelp(!needHelp);
   };
-  const navigate = useNavigate();
+
   const handleContinue = (e) => {
     e.preventDefault();
     emailOrPhone
@@ -22,9 +24,20 @@ const AccountAuth = ({ loggedIn }) => {
 
   const onChange = (e) => {
     let value = e.target.value;
-    setEmailOrPhone(
-      AccountUser.find((ac) => ac.email === value || ac.phone === value)
-    );
+    setEmailOrPhone(value);
+  };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .get(`http://localhost:8080/CheckEmail?emailOrPhone=${emailOrPhone}`)
+      .then((data) => {
+        const customer = data.data;
+        navigate("/SignIn", { state: { customer } });
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+      });
   };
 
   return (
@@ -60,7 +73,7 @@ const AccountAuth = ({ loggedIn }) => {
             <div className="py-4 w-full flex items-center justify-center">
               <button
                 className="bg-yellow-500 p-1 rounded-lg w-5/6 "
-                onClick={(e) => handleContinue(e)}
+                onClick={(e) => onSubmit(e)}
               >
                 Continue
               </button>

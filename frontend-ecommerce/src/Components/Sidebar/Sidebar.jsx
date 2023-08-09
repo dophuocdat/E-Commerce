@@ -67,7 +67,9 @@ const Sidebar = ({ loggedIn }) => {
             <div>
               <div className="flex flex-col text-center  ">
                 <small className="text-slate-400">Returns</small>
-                <span className="text-white">& Orders</span>
+                <Link to={"/myOrder"} className="text-white cursor-pointer">
+                  & Orders
+                </Link>
               </div>
             </div>
             <div>

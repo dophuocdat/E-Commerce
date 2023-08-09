@@ -9,10 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@CrossOrigin()
 public class CustomerController {
     private CustomerService customerService;
-
 
     @Autowired
     public CustomerController(CustomerService customerService) {
@@ -27,9 +27,9 @@ public class CustomerController {
 
     @PostMapping("/login")
     public ResponseEntity<Customer> loginCustomer(@RequestParam String email,
-                                                  @RequestParam String password){
-        Customer customer = customerService.loginUser(email,password);
-        if(customer == null){
+            @RequestParam String password) {
+        Customer customer = customerService.loginUser(email, password);
+        if (customer == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(customer);

@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
+import initList from "../../../Config/InitList";
 
-const OrderDetails = () => {
+const OrderDetails = ({ idProduct }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const [order, setOrder] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+  const [price, setPrice] = useState(0);
+
+  const product = initList.find((item) => item.id === Number(idProduct));
+
   // console.log(isLoggedIn);
   // const user = useSelector((state) => state.user);
   // console.log(user.user.name);
-  const handleOrder = () => {
-    isLoggedIn ? console.log("order") : navigate("/SignIn/auth");
+
+  const newOrder = {
+    product: product,
+    quantity,
+    price: Number(product.price * quantity),
   };
 
+  const handleOrder = () => {
+    isLoggedIn ? console.log("order") : navigate("/SignIn/auth");
+    setOrder((items) => [...items, newOrder]);
+  };
+  localStorage.setItem("myOrder", JSON.stringify(order));
   return (
     <div>
       <div className="p-2">
@@ -35,7 +50,13 @@ const OrderDetails = () => {
           <span className="text-lg text-green-700">In Stock</span>
           <div>
             <span>Qty:</span>
-            <select name="" id="" className="w-fit rounded-lg px-5">
+            <select
+              name=""
+              id=""
+              className="w-fit rounded-lg px-5"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+            >
               {Array.from({ length: 32 }, (_, i) => {
                 return (
                   <option key={i} value={i + 1}>

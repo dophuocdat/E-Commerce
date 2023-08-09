@@ -39,7 +39,7 @@ const Order = () => {
         </div>
 
         <div className="w-4/6 border max-lg:w-full">
-          <OrderDetails />
+          <OrderDetails idProduct={id} />
         </div>
       </div>
       <hr />

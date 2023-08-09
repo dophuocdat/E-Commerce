@@ -5,15 +5,18 @@ import { AccountUser } from "../../Config/AccountUser";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/authActions";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const Account = ({ loggedIn }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const [password, setPassword] = useState("");
 
-  const emailOrPhone = location.state ? location.state.emailOrPhone : "";
+  const customer = location.state ? location.state.customer : "";
   //console.log(emailOrPhone);
   const [isLogged, setIsLogged] = useState("");
+
   const handleContinue = (e) => {
     e.preventDefault();
     if (isLogged) {
@@ -29,6 +32,20 @@ const Account = ({ loggedIn }) => {
     let value = e.target.value;
     setIsLogged(AccountUser.find((ac) => ac.password === value));
   };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .get(`http://localhost:8080/CheckEmail?emailOrPhone=${emailOrPhone}`)
+      .then((data) => {
+        const customer = data.data;
+        navigate("/SignIn", { state: { customer } });
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+      });
+  };
+
   return (
     <div className="bg-white h-full flex items-center justify-center  flex-col">
       <Link to={"/"}>
@@ -44,9 +61,8 @@ const Account = ({ loggedIn }) => {
         <div className="p-7">
           <div className=" pb-3 text-2xl font-medium">Sign In</div>
           <div className="text-[0.76rem]">
-            <span>{emailOrPhone.email}</span>
+            <span>{customer.email}</span>
             <Link to={"/SignIn/auth"} className="text-blue-500">
-              {" "}
               Change
             </Link>
           </div>
