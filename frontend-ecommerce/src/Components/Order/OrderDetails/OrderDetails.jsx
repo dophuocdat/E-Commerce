@@ -5,12 +5,11 @@ import { useLocation, useNavigate } from "react-router";
 import initList from "../../../Config/InitList";
 
 const OrderDetails = ({ idProduct }) => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  // const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const [order, setOrder] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(0);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   const product = initList.find((item) => item.id === Number(idProduct));
 

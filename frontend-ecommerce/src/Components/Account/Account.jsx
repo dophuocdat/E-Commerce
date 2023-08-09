@@ -14,35 +14,22 @@ const Account = ({ loggedIn }) => {
   const [password, setPassword] = useState("");
 
   const customer = location.state ? location.state.customer : "";
-  //console.log(emailOrPhone);
-  const [isLogged, setIsLogged] = useState("");
 
-  const handleContinue = (e) => {
-    e.preventDefault();
-    if (isLogged) {
-      navigate("/");
-      loggedIn(true);
-      dispatch(login({ user: isLogged }));
-      localStorage.setItem("isLoggedIn", "true");
-    } else {
-      alert("Please enter your password");
-    }
-  };
-  const onChange = (e) => {
-    let value = e.target.value;
-    setIsLogged(AccountUser.find((ac) => ac.password === value));
-  };
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .get(`http://localhost:8080/CheckEmail?emailOrPhone=${emailOrPhone}`)
+      .post(
+        `http://localhost:8080/login?email=${customer.email}&password=${password}`
+      )
       .then((data) => {
-        const customer = data.data;
-        navigate("/SignIn", { state: { customer } });
+        console.log(data.data);
+        navigate("/");
+        dispatch(login({ user: data.data }));
+        // localStorage.setItem("isLoggedIn", "true");
+        loggedIn(true);
       })
       .catch((err) => {
         console.log(err);
-        setError(true);
       });
   };
 
@@ -83,13 +70,13 @@ const Account = ({ loggedIn }) => {
                 id="password"
                 className="p-2 border border-slate-400 rounded-lg"
                 placeholder="Your password"
-                onChange={(e) => onChange(e)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="py-4 w-full flex items-center justify-center">
               <button
                 className="bg-yellow-500 p-1 rounded-lg w-5/6 text-sm "
-                onClick={(e) => handleContinue(e)}
+                onClick={(e) => onSubmit(e)}
               >
                 Sign in
               </button>

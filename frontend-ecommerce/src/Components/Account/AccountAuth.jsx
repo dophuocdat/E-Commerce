@@ -15,13 +15,6 @@ const AccountAuth = ({ loggedIn }) => {
     setNeedHelp(!needHelp);
   };
 
-  const handleContinue = (e) => {
-    e.preventDefault();
-    emailOrPhone
-      ? navigate("/SignIn", { state: { emailOrPhone } })
-      : setError(true);
-  };
-
   const onChange = (e) => {
     let value = e.target.value;
     setEmailOrPhone(value);
