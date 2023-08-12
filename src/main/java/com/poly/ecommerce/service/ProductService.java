@@ -12,7 +12,7 @@ public interface ProductService {
 
     List<Product> getAllProduct();
 
-    Product addProduct(MultipartFile file, ProductDTO productDTO) throws IOException;
+    Product addProduct(MultipartFile file, ProductDTO productDTO);
 
     Product updateProduct(Long productId, ProductDTO productDTO);
 

@@ -14,16 +14,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.api.services.storage.Storage;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.StorageOptions;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -42,27 +39,38 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product addProduct(MultipartFile file, ProductDTO productDTO) throws IOException {
+    public Product addProduct(MultipartFile file, ProductDTO productDTO) {
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
-        String uploadDir = "product-images";
-        Path uploadPath = Paths.get(uploadDir);
-        Files.createDirectories(uploadPath);
-        try (InputStream inputStream = file.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            System.out.println(e.toString());
+        if (fileName.contains("..")) {
+            throw new IllegalArgumentException("Invalid file name");
         }
+        // String uploadDir = "frontend-ecommerce/src/images";
+        // Path uploadPath = Paths.get(uploadDir);
+        // Files.createDirectories(uploadPath);
+        // try (InputStream inputStream = file.getInputStream()) {
+        // Path filePath = uploadPath.resolve(fileName);
+        // Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        // } catch (IOException e) {
+        // System.out.println(e.toString());
+        // }
 
+        String base64Image;
+        try {
+            byte[] imageBytes = file.getBytes();
+            base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Product product = new Product();
 
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         product.setQuantityInStock(productDTO.getQuantityInStock());
-        product.setImagePath(uploadDir + "/" + fileName);
+        product.setType(productDTO.getType());
+        product.setImagePath(base64Image);
         return productRepository.save(product);
     }
 
@@ -74,6 +82,7 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         product.setQuantityInStock(productDTO.getQuantityInStock());
+        product.setType(productDTO.getType());
         return productRepository.save(product);
     }
 

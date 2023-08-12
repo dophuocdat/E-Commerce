@@ -36,7 +36,7 @@ public class ProductController {
 
     @PostMapping()
     public ResponseEntity<Product> addProduct(@RequestParam("file") MultipartFile file,
-            @ModelAttribute ProductDTO productDTO) throws IOException {
+            @ModelAttribute ProductDTO productDTO){
         Product createdProduct = productService.addProduct(file, productDTO);
         return ResponseEntity.ok(createdProduct);
     }

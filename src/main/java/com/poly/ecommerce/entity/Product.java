@@ -11,14 +11,13 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
-
     private String name;
-
     private String description;
-
     private double price;
-
     private int quantityInStock;
 
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
     private String imagePath;
+    private String type;
 }
