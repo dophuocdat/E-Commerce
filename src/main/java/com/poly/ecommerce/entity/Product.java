@@ -19,4 +19,6 @@ public class Product {
     private double price;
 
     private int quantityInStock;
+
+    private String imagePath;
 }

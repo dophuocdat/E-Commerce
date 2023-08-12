@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -34,8 +35,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer register(CustomerDTO customerDTO) {
         String email = customerDTO.getEmail();
-        if (customerRepository.existsByEmail(email)) {
-            throw new IllegalArgumentException("Email already exists. Please choose a different email");
+        String phone = customerDTO.getPhone();
+        if (customerRepository.existsByEmail(email) || customerRepository.existsByPhone(phone)) {
+            throw new IllegalArgumentException("Email or Phone already exists. Please choose a different email");
 
         }
 
@@ -43,6 +45,13 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setAddress(customerDTO.getAddress());
         customer.setEmail(customerDTO.getEmail());
         customer.setPassword(passwordEncoder.encode(customerDTO.getPassword()));
+
+        if (customerDTO.getRoles() == null) {
+            customer.setRoles(Collections.singleton("USER"));
+        } else {
+            customer.setRoles(customerDTO.getRoles());
+        }
+
         customer.setPhone(customerDTO.getPhone());
         return customerRepository.save(customer);
     }
@@ -59,7 +68,6 @@ public class CustomerServiceImpl implements CustomerService {
     public ResponseEntity<Customer> findByEmailOrPhone(String emailOrPhone) {
         Customer customer;
         if (emailOrPhone.matches("\\d+")) {
-            System.out.println(emailOrPhone);
             customer = customerRepository.findByPhone(emailOrPhone);
 
         } else {

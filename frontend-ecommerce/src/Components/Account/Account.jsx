@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { AccountUser } from "../../Config/AccountUser";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/authActions";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const Account = ({ loggedIn }) => {
+const Account = ({ clearHeader }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
-
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const customer = location.state ? location.state.customer : "";
+  const storedUser = useSelector((state) => state.user);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -21,12 +20,13 @@ const Account = ({ loggedIn }) => {
       .post(
         `http://localhost:8080/login?email=${customer.email}&password=${password}`
       )
-      .then((data) => {
-        console.log(data.data);
+      .then((res) => {
+        const userData = res.data;
         navigate("/");
-        dispatch(login({ user: data.data }));
-        // localStorage.setItem("isLoggedIn", "true");
-        loggedIn(true);
+        dispatch(login({ user: userData }));
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        clearHeader(true);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +40,7 @@ const Account = ({ loggedIn }) => {
           src="https://purepng.com/public/uploads/medium/amazon-logo-rgp.png"
           alt=""
           className=" scale-90 max-w-80 max-h-40 overflow-hidden cursor-pointer"
-          onClick={() => loggedIn(true)}
+          onClick={() => clearHeader(true)}
         />
       </Link>
 

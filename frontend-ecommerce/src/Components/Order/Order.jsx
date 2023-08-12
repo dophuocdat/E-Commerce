@@ -5,7 +5,7 @@ import OrderDetails from "./OrderDetails/OrderDetails";
 import initList from "../../Config/InitList";
 import Comment from "../Comment/Comment";
 import TopSeller from "../../Components/TopSeller/TopSeller";
-const Order = () => {
+const Order = ({ clearHeader }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(initList);
@@ -39,7 +39,7 @@ const Order = () => {
         </div>
 
         <div className="w-4/6 border max-lg:w-full">
-          <OrderDetails idProduct={id} />
+          <OrderDetails idProduct={id} clearHeader={clearHeader} />
         </div>
       </div>
       <hr />

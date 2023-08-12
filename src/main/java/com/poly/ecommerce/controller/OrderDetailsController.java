@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin()
 @RequestMapping("ecommerce/order-details")
+@CrossOrigin()
 public class OrderDetailsController {
 
     private final OrderDetailsService orderDetailsService;
@@ -38,16 +38,14 @@ public class OrderDetailsController {
     @PutMapping("/{orderDetailsId}")
     public ResponseEntity<OrderDetails> updateDetails(
             @PathVariable Long orderDetailsId,
-            @RequestBody OrderDeTailsDTO orderDeTailsDTO
-    ) {
+            @RequestBody OrderDeTailsDTO orderDeTailsDTO) {
         OrderDetails updateOrderDetails = orderDetailsService.updateOrderDetails(orderDetailsId, orderDeTailsDTO);
         return ResponseEntity.ok(updateOrderDetails);
     }
 
     @DeleteMapping("/{orderDetaisId}")
     public ResponseEntity<Void> deleteOrderDetails(
-            @PathVariable Long orderDetaisId
-    ){
+            @PathVariable Long orderDetaisId) {
         orderDetailsService.deleteOrderDetails(orderDetaisId);
         return ResponseEntity.noContent().build();
     }

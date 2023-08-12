@@ -9,12 +9,12 @@ import AdminPage from "../AdminPage/AdminPage";
 import MyOrder from "../../Components/MyOrder/MyOrder";
 
 const Router = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [clearHeader, setClearHeader] = useState(true);
   return (
     <div>
-      {loggedIn ? (
+      {clearHeader ? (
         <div>
-          <Sidebar loggedIn={setLoggedIn} />
+          <Sidebar clearHeader={setClearHeader} />
         </div>
       ) : null}
       <div className="bg-slate-100">
@@ -22,15 +22,18 @@ const Router = () => {
           <Route path="/" element={<HomePage />}></Route>
           <Route
             path="/SignIn/auth"
-            element={<AccountAuth loggedIn={setLoggedIn} />}
+            element={<AccountAuth clearHeader={setClearHeader} />}
           ></Route>
           <Route
             path="/signIn"
-            element={<Account loggedIn={setLoggedIn} />}
+            element={<Account clearHeader={setClearHeader} />}
           ></Route>
-          <Route path="/product/:id" element={<Order />}></Route>
+          <Route
+            path="/product/:id"
+            element={<Order clearHeader={setClearHeader} />}
+          ></Route>
           <Route path="/myOrder" element={<MyOrder />}></Route>
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/*" element={<AdminPage />} />
         </Routes>
       </div>
     </div>

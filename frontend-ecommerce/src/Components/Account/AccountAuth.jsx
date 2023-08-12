@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AccountUser } from "../../Config/AccountUser";
 import axios from "axios";
 
-const AccountAuth = ({ loggedIn }) => {
+const AccountAuth = ({ clearHeader }) => {
   const [needHelp, setNeedHelp] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState({});
   const [error, setError] = useState(false);
@@ -40,7 +40,7 @@ const AccountAuth = ({ loggedIn }) => {
           src="https://purepng.com/public/uploads/medium/amazon-logo-rgp.png"
           alt=""
           className=" scale-90 max-w-80 max-h-40 overflow-hidden "
-          onClick={() => loggedIn(true)}
+          onClick={() => clearHeader(true)}
         />
       </Link>
 

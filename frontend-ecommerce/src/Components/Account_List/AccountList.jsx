@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../../redux/authActions";
-const AccountList = ({ onClick, loggedIn }) => {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+import { login, logout } from "../../redux/authActions";
+const AccountList = ({ onClick, clearHeader }) => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   const handleLogout = () => {
     dispatch(logout());
+    localStorage.setItem("user", null);
   };
-
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  console.log(storedUser?.roles[0] || "logout");
   return (
     <div className="bg-slate-200 w-[30rem] absolute top-20 z-50">
       <div className="grid grid-cols-6 gap-4 " onClick={onClick}>
@@ -18,12 +20,12 @@ const AccountList = ({ onClick, loggedIn }) => {
                   font-semibold flex items-center 
                   justify-center py-3 flex-col "
         >
-          {!isLoggedIn ? (
+          {!storedUser ? (
             <>
               <Link
                 to={"/signIn/auth"}
                 className="bg-yellow-50 w-40 h-9 rounded-lg hover:bg-yellow-400 transition-all "
-                onClick={() => loggedIn(false)}
+                onClick={() => clearHeader(false)}
               >
                 Sign in
               </Link>
@@ -56,13 +58,16 @@ const AccountList = ({ onClick, loggedIn }) => {
           <h1 className="font-semibold">Your Account</h1>
           <div className="font-normal flex flex-col justify-center">
             <span className="hover-item">Account</span>
-            <Link
-              to={"/admin"}
-              className="hover-item"
-              onClick={() => loggedIn(false)}
-            >
-              Admin
-            </Link>
+            {storedUser && storedUser.roles[0] === "ADMIN" && (
+              <Link
+                to={"/admin"}
+                className="hover-item"
+                onClick={() => clearHeader(false)}
+              >
+                Admin
+              </Link>
+            )}
+
             <span className="hover-item">Order</span>
             <span className="hover-item">Watchlist</span>
             <span className="hover-item">Browsing History</span>

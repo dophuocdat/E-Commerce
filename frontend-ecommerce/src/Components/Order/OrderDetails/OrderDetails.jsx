@@ -1,33 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router";
 import initList from "../../../Config/InitList";
 
-const OrderDetails = ({ idProduct }) => {
+import axios from "axios";
+import { useNavigate, useParams } from "react-router";
+import { useDisclosure } from "@chakra-ui/react";
+import InfoOrder from "./InfoOrder";
+
+const OrderDetails = ({ idProduct, clearHeader }) => {
   const navigate = useNavigate();
   // const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const [order, setOrder] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-
   const product = initList.find((item) => item.id === Number(idProduct));
-
-  // console.log(isLoggedIn);
-  // const user = useSelector((state) => state.user);
-  // console.log(user.user.name);
-
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const newOrder = {
-    product: product,
-    quantity,
-    price: Number(product.price * quantity),
+    customerId: storedUser.customerId,
+    status: true,
+    totalAmount: product.price,
+  };
+
+  const addOrder = async () => {
+    // e.preventDefault();
+    await axios
+      .post(`http://localhost:8080/ecommerce/orders`, newOrder)
+      .then((res) => {
+        setOrder(res.data);
+        clearHeader(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleOrder = () => {
-    isLoggedIn ? console.log("order") : navigate("/SignIn/auth");
-    setOrder((items) => [...items, newOrder]);
+    if (!storedUser) {
+      navigate("/SignIn/auth");
+      clearHeader(false);
+    } else {
+      addOrder();
+      handleOpenModal();
+    }
   };
-  localStorage.setItem("myOrder", JSON.stringify(order));
+
+  const orderDetails = {
+    quantity: quantity,
+    productId: idProduct, // Sử dụng order.orderId sau khi cập nhật
+    orderId: product.id,
+  };
+
+  const handleOpenModal = () => {
+    onOpen();
+  };
+
   return (
     <div>
       <div className="p-2">
@@ -85,6 +111,7 @@ const OrderDetails = ({ idProduct }) => {
           <button>Add to list</button>
         </div>
       </div>
+      <InfoOrder isOpen={isOpen} onClose={onClose} item={orderDetails} />
     </div>
   );
 };

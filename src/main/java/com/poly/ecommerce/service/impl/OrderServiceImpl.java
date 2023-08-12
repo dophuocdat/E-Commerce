@@ -16,7 +16,6 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
     private CustomerRepository customerRepository;
 
-
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, CustomerRepository customerRepository) {
         this.orderRepository = orderRepository;
@@ -58,5 +57,18 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("Order not found"));
         orderRepository.delete(order);
+    }
+
+    @Override
+    public Order getByOrderId(Long orderId) {
+        Order order = orderRepository.findById(orderId).get();
+        return order;
+
+    }
+
+    @Override
+    public void deleteAll() {
+        orderRepository.deleteAll();
+
     }
 }

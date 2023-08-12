@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -9,9 +9,13 @@ import Language from "./Language/Language";
 import "./Sidebar.css";
 import SubSidebar from "./SubSidebar/SubSidebar";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-const Sidebar = ({ loggedIn }) => {
+const Sidebar = ({ clearHeader }) => {
   const [optionSetting, setOptionSetting] = useState(false);
+  const dispatch = useDispatch();
+
+  const storedUser = JSON.parse(localStorage.getItem("user"));
   const handleOnclick = () => {
     setOptionSetting((i) => !i);
   };
@@ -44,7 +48,7 @@ const Sidebar = ({ loggedIn }) => {
             <div className="flex items-center h-full pl-2">
               <div className="flex flex-col items-center justify-center relative h-full text-center ">
                 <small className="text-slate-400 text-center ">
-                  Hello, sign in
+                  Hello, {storedUser ? storedUser.email : "Sign in"}
                 </small>
                 <p
                   className="text-sm text-white flex gap-3 items-center justify-center"
@@ -58,7 +62,10 @@ const Sidebar = ({ loggedIn }) => {
                   )}
                 </p>
                 {optionSetting ? (
-                  <AccountList onClick={handleOnclick} loggedIn={loggedIn} />
+                  <AccountList
+                    onClick={handleOnclick}
+                    clearHeader={clearHeader}
+                  />
                 ) : (
                   ""
                 )}
