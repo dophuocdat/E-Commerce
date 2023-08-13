@@ -7,13 +7,13 @@ const AddProduct = () => {
   const [products, setProducts] = useState([]);
   const product = async () => {
     await axios.get("http://localhost:8080/ecommerce/product").then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       setProducts(res.data);
     });
   };
   useEffect(() => {
     product();
-  }, []);
+  }, [product]);
 
   return (
     <div className="w-[100wh]">

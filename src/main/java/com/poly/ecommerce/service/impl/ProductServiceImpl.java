@@ -46,16 +46,6 @@ public class ProductServiceImpl implements ProductService {
         if (fileName.contains("..")) {
             throw new IllegalArgumentException("Invalid file name");
         }
-        // String uploadDir = "frontend-ecommerce/src/images";
-        // Path uploadPath = Paths.get(uploadDir);
-        // Files.createDirectories(uploadPath);
-        // try (InputStream inputStream = file.getInputStream()) {
-        // Path filePath = uploadPath.resolve(fileName);
-        // Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        // } catch (IOException e) {
-        // System.out.println(e.toString());
-        // }
-
         String base64Image;
         try {
             byte[] imageBytes = file.getBytes();

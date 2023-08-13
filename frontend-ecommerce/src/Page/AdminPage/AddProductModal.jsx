@@ -15,22 +15,43 @@ import {
 } from "@chakra-ui/react";
 import Search from "../../Components/Search/Search";
 import { BiAddToQueue } from "react-icons/bi";
+import axios from "axios";
 const AddProductModal = () => {
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(10);
   const [type, setType] = useState("");
-  // const formData = FormData();
-  function handleimage(e) {
-    setImage(e.target.files[0]);
-    console.log(image);
-  }
 
-  // useEffect(() => {
-  //   console.log(name);
-  // }, [name]);
+  const handleUpload = async () => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("quantity", quantity);
+    formData.append("type", type);
+    formData.append("file", image);
+
+    await axios
+      .post("http://localhost:8080/ecommerce/product", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setName("");
+        setDescription("");
+        setPrice(0);
+        setQuantity(0);
+        setType("");
+        setImage("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -57,7 +78,7 @@ const AddProductModal = () => {
                   <Input
                     type="file"
                     accept="image/*"
-                    onChange={handleimage}
+                    onChange={(e) => setImage(e.target.files[0])}
                   ></Input>
                   <Stack spacing={3}>
                     <InputGroup>
@@ -96,6 +117,7 @@ const AddProductModal = () => {
                       <Input
                         placeholder="Enter price"
                         border={"1px"}
+                        type="number"
                         onChange={(e) => setPrice(e.target.value)}
                       />
                     </InputGroup>
@@ -109,6 +131,7 @@ const AddProductModal = () => {
                       <Input
                         placeholder="Quantity in Stock"
                         border={"1px"}
+                        type="number"
                         onChange={(e) => setQuantity(e.target.value)}
                       />
                     </InputGroup>
@@ -124,7 +147,10 @@ const AddProductModal = () => {
                     </Select>
                   </Stack>
                   <div className="w-full flex items-center justify-center  ">
-                    <button className="w-2/6 rounded-lg bg-slate-400 hover:bg-slate-700 hover:text-white">
+                    <button
+                      className="w-2/6 rounded-lg bg-slate-400 hover:bg-slate-700 hover:text-white"
+                      onClick={handleUpload}
+                    >
                       Upload
                     </button>
                   </div>
