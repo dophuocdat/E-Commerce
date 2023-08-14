@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/ecommerce/orders")
+@CrossOrigin()
 public class OrderController {
     private OrderService orderService;
 
@@ -26,6 +27,12 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
 
+    @GetMapping("/{orderId}")
+    public ResponseEntity<Order> getOrderById(@PathVariable Long orderId) {
+        Order orders = orderService.getByOrderId(orderId);
+        return ResponseEntity.ok(orders);
+    }
+
     @PostMapping
     public ResponseEntity<Order> addOrder(@RequestBody OrderDTO orderDTO) {
         Order createOrder = orderService.addOrder(orderDTO);
@@ -37,11 +44,17 @@ public class OrderController {
         Order updateOrder = orderService.updateOrder(orderId, orderDTO);
         return ResponseEntity.ok(updateOrder);
     }
+
     @DeleteMapping("/{orderId}")
     public ResponseEntity<Void> deleteOrder(
-            @PathVariable Long orderId
-    ){
+            @PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAllOrder() {
+        orderService.deleteAll();
         return ResponseEntity.noContent().build();
     }
 

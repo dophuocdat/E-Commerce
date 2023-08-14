@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -8,9 +8,14 @@ import Search from "../Search/Search";
 import Language from "./Language/Language";
 import "./Sidebar.css";
 import SubSidebar from "./SubSidebar/SubSidebar";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-const Sidebar = () => {
+const Sidebar = ({ clearHeader }) => {
   const [optionSetting, setOptionSetting] = useState(false);
+  const dispatch = useDispatch();
+
+  const storedUser = JSON.parse(localStorage.getItem("user"));
   const handleOnclick = () => {
     setOptionSetting((i) => !i);
   };
@@ -19,11 +24,13 @@ const Sidebar = () => {
     <>
       <div className="w-full bg-slate-700 h-20">
         <div className="h-full flex items-center gap-2">
-          <img
-            src="https://th.bing.com/th/id/R.ca4da319ab763c8d996fff8ecaacc6ef?rik=xyZWahtpQkPunQ&riu=http%3a%2f%2fwww.adventureswithadifference.com%2fresources%2fAvailable-at-Amazon-logo-transparent-460x280.png&ehk=eUHJEueVu7znNS7T9blT1YjDdqvrTnrqhgoz7oBbeIw%3d&risl=&pid=ImgRaw&r=0"
-            alt=""
-            className=" scale-50 w-32"
-          />
+          <Link to={"/"}>
+            <img
+              src="https://th.bing.com/th/id/R.ca4da319ab763c8d996fff8ecaacc6ef?rik=xyZWahtpQkPunQ&riu=http%3a%2f%2fwww.adventureswithadifference.com%2fresources%2fAvailable-at-Amazon-logo-transparent-460x280.png&ehk=eUHJEueVu7znNS7T9blT1YjDdqvrTnrqhgoz7oBbeIw%3d&risl=&pid=ImgRaw&r=0"
+              alt=""
+              className=" scale-50 w-32"
+            />
+          </Link>
           <div className="location text-white max-sm:hidden">
             <div className="flex-row flex items-center justify-center gap-2">
               <FaLocationDot />
@@ -41,7 +48,7 @@ const Sidebar = () => {
             <div className="flex items-center h-full pl-2">
               <div className="flex flex-col items-center justify-center relative h-full text-center ">
                 <small className="text-slate-400 text-center ">
-                  Hello, sign in
+                  Hello, {storedUser ? storedUser.email : "Sign in"}
                 </small>
                 <p
                   className="text-sm text-white flex gap-3 items-center justify-center"
@@ -54,13 +61,22 @@ const Sidebar = () => {
                     <IoIosArrowDown className="text-white text-2xl" />
                   )}
                 </p>
-                {optionSetting ? <AccountList /> : ""}
+                {optionSetting ? (
+                  <AccountList
+                    onClick={handleOnclick}
+                    clearHeader={clearHeader}
+                  />
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <div>
               <div className="flex flex-col text-center  ">
                 <small className="text-slate-400">Returns</small>
-                <span className="text-white">& Orders</span>
+                <Link to={"/myOrder"} className="text-white cursor-pointer">
+                  & Orders
+                </Link>
               </div>
             </div>
             <div>

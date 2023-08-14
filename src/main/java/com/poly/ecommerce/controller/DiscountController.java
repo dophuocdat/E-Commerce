@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@CrossOrigin()
 @RequestMapping("/ecommerce/discounts")
 public class DiscountController {
 
