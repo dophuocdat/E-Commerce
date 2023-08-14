@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/ecommerce/product")
 @MultipartConfig
 public class ProductController {
@@ -36,7 +36,7 @@ public class ProductController {
 
     @PostMapping()
     public ResponseEntity<Product> addProduct(@RequestParam("file") MultipartFile file,
-            @ModelAttribute ProductDTO productDTO){
+            @ModelAttribute ProductDTO productDTO) {
         Product createdProduct = productService.addProduct(file, productDTO);
         return ResponseEntity.ok(createdProduct);
     }
@@ -52,6 +52,12 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
         productService.deleteProduct(productId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{productId}")
+    public ResponseEntity<Product> getProductFindById(@PathVariable Long productId) {
+        Product product = productService.findById(productId);
+        return ResponseEntity.ok(product);
     }
 
 }

@@ -38,13 +38,15 @@ public class CustomerDetailsController {
     }
 
     @PutMapping("/{productDetailsId}")
-    public ResponseEntity<ProductDetails> updateProductDetails(@PathVariable Long productDetailsId, @RequestBody ProductDetailsDTO productDetailsDTO) {
-        ProductDetails updateProductDetails = productDetailsService.updateProductDetails(productDetailsId, productDetailsDTO);
+    public ResponseEntity<ProductDetails> updateProductDetails(@PathVariable Long productDetailsId,
+            @RequestBody ProductDetailsDTO productDetailsDTO) {
+        ProductDetails updateProductDetails = productDetailsService.updateProductDetails(productDetailsId,
+                productDetailsDTO);
         return ResponseEntity.ok(updateProductDetails);
     }
 
     @DeleteMapping("/{productDetailsId}")
-    public ResponseEntity<Void> deleteProductDetails(@PathVariable Long productDetailsId ){
+    public ResponseEntity<Void> deleteProductDetails(@PathVariable Long productDetailsId) {
         productDetailsService.deleteProductDetails(productDetailsId);
         return ResponseEntity.noContent().build();
     }

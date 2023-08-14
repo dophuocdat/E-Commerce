@@ -11,7 +11,7 @@ const AdminPage = () => {
   const tabs = [
     {
       name: "Dashboard",
-      path: "/admin/dashboard",
+      path: "/",
     },
     {
       name: "Users",

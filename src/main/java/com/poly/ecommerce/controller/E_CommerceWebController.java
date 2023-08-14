@@ -1,6 +1,5 @@
 package com.poly.ecommerce.controller;
 
-
 import com.poly.ecommerce.entity.Customer;
 import com.poly.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +25,14 @@ public class E_CommerceWebController {
     }
 
     @GetMapping("/CheckEmail")
-    public ResponseEntity<Customer> checkEmail( @RequestParam String emailOrPhone){
-//        System.out.println(emailOrPhone);
+    public ResponseEntity<Customer> checkEmail(@RequestParam String emailOrPhone) {
+        // System.out.println(emailOrPhone);
         return customerService.findByEmailOrPhone(emailOrPhone);
     }
 
-
     @PostMapping("/signup")
-    public Customer signUp(){
+    public Customer signUp() {
         return null;
     }
-
 
 }

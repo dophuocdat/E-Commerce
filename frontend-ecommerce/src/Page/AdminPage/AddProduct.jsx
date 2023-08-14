@@ -6,10 +6,14 @@ import axios from "axios";
 const AddProduct = () => {
   const [products, setProducts] = useState([]);
   const product = async () => {
-    await axios.get("http://localhost:8080/ecommerce/product").then((res) => {
-      //console.log(res.data);
-      setProducts(res.data);
-    });
+    await axios
+      .get("http://localhost:8080/ecommerce/product")
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   useEffect(() => {
     product();

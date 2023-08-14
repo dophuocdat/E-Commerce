@@ -27,6 +27,7 @@ public class Product {
     private double price;
 
     @NotNull
+    @Min(value = 25)
     private int quantityInStock;
 
     @Lob

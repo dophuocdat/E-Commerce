@@ -21,7 +21,7 @@ const AddProductModal = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
-  const [quantity, setQuantity] = useState(10);
+  const [quantityInStock, setQuantityInStock] = useState(10);
   const [type, setType] = useState("");
 
   const handleUpload = async () => {
@@ -29,7 +29,7 @@ const AddProductModal = () => {
     formData.append("name", name);
     formData.append("description", description);
     formData.append("price", price);
-    formData.append("quantity", quantity);
+    formData.append("quantityInStock", quantityInStock);
     formData.append("type", type);
     formData.append("file", image);
 
@@ -41,12 +41,6 @@ const AddProductModal = () => {
       })
       .then((res) => {
         console.log(res.data);
-        setName("");
-        setDescription("");
-        setPrice(0);
-        setQuantity(0);
-        setType("");
-        setImage("");
       })
       .catch((err) => {
         console.log(err);
@@ -132,7 +126,7 @@ const AddProductModal = () => {
                         placeholder="Quantity in Stock"
                         border={"1px"}
                         type="number"
-                        onChange={(e) => setQuantity(e.target.value)}
+                        onChange={(e) => setQuantityInStock(e.target.value)}
                       />
                     </InputGroup>
                     <Select
