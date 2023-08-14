@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -12,8 +12,9 @@ import {
 } from "@chakra-ui/react";
 
 const UpdateProductModal = ({ onClose, isOpen, item }) => {
-
-console.log(item);
+  useEffect(() => {
+    console.log(item);
+  }, [item]);
 
   return (
     <div className="border w-full bg-red-700">

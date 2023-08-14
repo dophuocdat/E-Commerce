@@ -19,7 +19,7 @@
   const ShowProduct = ({ items }) => {
     const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
-    const [item, setItem] = useState({});
+    const [item, setItem] = useState(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
     
     const totalPageCount = Math.ceil(items.length / itemsPerPage);
@@ -162,9 +162,11 @@
             <Button onClick={() => handlePageChange(totalPageCount)}>Last</Button>
           </div>
         </div>
-        {
-          item && <UpdateProductModal isOpen={isOpen} onClose={onClose} item={item} />
-        }
+        
+         {
+            item && <UpdateProductModal isOpen={isOpen} onClose={onClose} item={item} />
+         } 
+        
       </div>                                                                                                                                                                                                                                                                                                                                                                                                                                        
     );
   };
